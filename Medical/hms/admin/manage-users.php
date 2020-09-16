@@ -1,26 +1,21 @@
 <?php
 session_start();
-//error_reporting(0);
+error_reporting(0);
 include('include/config.php');
 include('include/checklogin.php');
 check_login();
 
 if(isset($_GET['del']))
 		  {
-		          mysql_query("delete from users where id = '".$_GET['id']."'");
+		          mysqli_query($con,"delete from users where id = '".$_GET['id']."'");
                   $_SESSION['msg']="data deleted !!";
 		  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Admin | Manage Patients</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta content="" name="description" />
-		<meta content="" name="author" />
+		<title>Admin | Manage Users</title>
+		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
@@ -50,14 +45,14 @@ if(isset($_GET['del']))
 						<section id="page-title">
 							<div class="row">
 								<div class="col-sm-8">
-									<h1 class="mainTitle">Admin | Manage Patients</h1>
+									<h1 class="mainTitle">Admin | Manage Users</h1>
 																	</div>
 								<ol class="breadcrumb">
 									<li>
 										<span>Admin</span>
 									</li>
 									<li class="active">
-										<span>Manage Patients</span>
+										<span>Manage Users</span>
 									</li>
 								</ol>
 							</div>
@@ -69,7 +64,7 @@ if(isset($_GET['del']))
 
 									<div class="row">
 								<div class="col-md-12">
-									<h5 class="over-title margin-bottom-15">Manage <span class="text-bold">Patients</span></h5>
+									<h5 class="over-title margin-bottom-15">Manage <span class="text-bold">Users</span></h5>
 									<p style="color:red;"><?php echo htmlentities($_SESSION['msg']);?>
 								<?php echo htmlentities($_SESSION['msg']="");?></p>	
 									<table class="table table-hover" id="sample-table-1">
@@ -89,9 +84,9 @@ if(isset($_GET['del']))
 										</thead>
 										<tbody>
 <?php
-$sql=mysql_query("select * from users");
+$sql=mysqli_query($con,"select * from users");
 $cnt=1;
-while($row=mysql_fetch_array($sql))
+while($row=mysqli_fetch_array($sql))
 {
 ?>
 

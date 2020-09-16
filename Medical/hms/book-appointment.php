@@ -7,7 +7,6 @@ check_login();
 
 if(isset($_POST['submit']))
 {
-
 $specilization=$_POST['Doctorspecialization'];
 $doctorid=$_POST['doctor'];
 $userid=$_SESSION['id'];
@@ -16,8 +15,7 @@ $appdate=$_POST['appdate'];
 $time=$_POST['apptime'];
 $userstatus=1;
 $docstatus=1;
-
-	$query=mysql_query("insert into appointment(doctorSpecialization,doctorId,userId,consultancyFees,appointmentDate,appointmentTime,userStatus,doctorStatus) values('$specilization','$doctorid','$userid','$fees','$appdate','$time','$userstatus','$docstatus')");
+$query=mysqli_query($con,"insert into appointment(doctorSpecialization,doctorId,userId,consultancyFees,appointmentDate,appointmentTime,userStatus,doctorStatus) values('$specilization','$doctorid','$userid','$fees','$appdate','$time','$userstatus','$docstatus')");
 	if($query)
 	{
 		echo "<script>alert('Your appointment successfully booked');</script>";
@@ -29,12 +27,7 @@ $docstatus=1;
 <html lang="en">
 	<head>
 		<title>User  | Book Appointment</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta content="" name="description" />
-		<meta content="" name="author" />
+	
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
@@ -130,8 +123,8 @@ function getfee(val) {
 															</label>
 							<select name="Doctorspecialization" class="form-control" onChange="getdoctor(this.value);" required="required">
 																<option value="">Select Specialization</option>
-<?php $ret=mysql_query("select * from doctorspecilization");
-while($row=mysql_fetch_array($ret))
+<?php $ret=mysqli_query($con,"select * from doctorspecilization");
+while($row=mysqli_fetch_array($ret))
 {
 ?>
 																<option value="<?php echo htmlentities($row['specilization']);?>">
@@ -171,7 +164,8 @@ while($row=mysql_fetch_array($ret))
 															<label for="AppointmentDate">
 																Date
 															</label>
-									<input class="form-control datepicker" name="appdate"  type="date" required="required">
+<input class="form-control datepicker" name="appdate"  required="required" data-date-format="yyyy-mm-dd">
+	
 														</div>
 														
 <div class="form-group">
@@ -180,7 +174,7 @@ while($row=mysql_fetch_array($ret))
 														Time
 													
 															</label>
-									<input class="form-control datepicker" name="apptime" type="time" required="required">
+			<input class="form-control" name="apptime" id="timepicker1" required="required">eg : 10:00 PM
 														</div>														
 														
 														<button type="submit" name="submit" class="btn btn-o btn-primary">
@@ -245,7 +239,15 @@ while($row=mysql_fetch_array($ret))
 				Main.init();
 				FormElements.init();
 			});
+
+			$('.datepicker').datepicker({
+    format: 'yyyy-mm-dd',
+    startDate: '-3d'
+});
 		</script>
+		  <script type="text/javascript">
+            $('#timepicker1').timepicker();
+        </script>
 		<!-- end: JavaScript Event Handlers for this page -->
 		<!-- end: CLIP-TWO JAVASCRIPTS -->
 

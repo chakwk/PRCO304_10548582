@@ -1,6 +1,6 @@
 <?php
 session_start();
-//error_reporting(0);
+error_reporting(0);
 include('include/config.php');
 include('include/checklogin.php');
 if(isset($_POST['submit']))
@@ -11,7 +11,7 @@ $docaddress=$_POST['clinicaddress'];
 $docfees=$_POST['docfees'];
 $doccontactno=$_POST['doccontact'];
 $docemail=$_POST['docemail'];
-$sql=mysql_query("Update doctors set specilization='$docspecialization',doctorName='$docname',address='$docaddress',docFees='$docfees',contactno='$doccontactno',docEmail='$docemail' where docEmail='".$_SESSION['dlogin']."'");
+$sql=mysqli_query($con,"Update doctors set specilization='$docspecialization',doctorName='$docname',address='$docaddress',docFees='$docfees',contactno='$doccontactno' where id='".$_SESSION['id']."'");
 if($sql)
 {
 echo "<script>alert('Doctor Details updated Successfully');</script>";
@@ -23,12 +23,7 @@ echo "<script>alert('Doctor Details updated Successfully');</script>";
 <html lang="en">
 	<head>
 		<title>Doctr | Edit Doctor Details</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta content="" name="description" />
-		<meta content="" name="author" />
+		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
@@ -82,10 +77,16 @@ echo "<script>alert('Doctor Details updated Successfully');</script>";
 													<h5 class="panel-title">Edit Doctor</h5>
 												</div>
 												<div class="panel-body">
-									<?php $sql=mysql_query("select * from doctors where docEmail='".$_SESSION['dlogin']."'");
-while($data=mysql_fetch_array($sql))
+									<?php $sql=mysqli_query($con,"select * from doctors where docEmail='".$_SESSION['dlogin']."'");
+while($data=mysqli_fetch_array($sql))
 {
 ?>
+<h4><?php echo htmlentities($data['doctorName']);?>'s Profile</h4>
+<p><b>Profile Reg. Date: </b><?php echo htmlentities($data['creationDate']);?></p>
+<?php if($data['updationDate']){?>
+<p><b>Profile Last Updation Date: </b><?php echo htmlentities($data['updationDate']);?></p>
+<?php } ?>
+<hr />
 													<form role="form" name="adddoc" method="post" onSubmit="return valid();">
 														<div class="form-group">
 															<label for="DoctorSpecialization">
@@ -94,8 +95,8 @@ while($data=mysql_fetch_array($sql))
 							<select name="Doctorspecialization" class="form-control" required="required">
 					<option value="<?php echo htmlentities($data['specilization']);?>">
 					<?php echo htmlentities($data['specilization']);?></option>
-<?php $ret=mysql_query("select * from doctorspecilization");
-while($row=mysql_fetch_array($ret))
+<?php $ret=mysqli_query($con,"select * from doctorspecilization");
+while($row=mysqli_fetch_array($ret))
 {
 ?>
 																<option value="<?php echo htmlentities($row['specilization']);?>">

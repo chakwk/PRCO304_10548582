@@ -729,7 +729,7 @@ body{
 	padding-bottom:5px;
 	font-family: 'Ropa Sans', sans-serif;
 }
-.contact-form input[type="text"],.contact-form textarea{
+.contact-form input[type="text"],input[type="email"],.contact-form textarea{
 		    padding:8px;
 			display:block;
 			width:98%;

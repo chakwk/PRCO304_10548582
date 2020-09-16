@@ -6,7 +6,7 @@
 							<i class="ti-align-justify"></i>
 						</a>
 						<a class="navbar-brand" href="#">
-							<h2 style="padding-top:2% ">HMS</h2>
+							<h2 style="padding-top:20%; color:#000 ">Medical</h2>
 						</a>
 						<a href="#" class="sidebar-toggler pull-right visible-md visible-lg" data-toggle-class="app-sidebar-closed" data-toggle-target="#app">
 							<i class="ti-align-justify"></i>
@@ -22,13 +22,13 @@
 						<ul class="nav navbar-right">
 							<!-- start: MESSAGES DROPDOWN -->
 								<li  style="padding-top:2% ">
-								<h2>Hospital Management System</h2>
+								<h2>Medical Database System</h2>
 							</li>
 						
 						
 							<li class="dropdown current-user">
 								<a href class="dropdown-toggle" data-toggle="dropdown">
-									<img src="assets/images/avatar-1.jpg" alt="Peter"> <span class="username">
+									<img src="assets/images/images.jpg" > <span class="username">
 
 
 

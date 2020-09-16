@@ -58,7 +58,7 @@
 											<i class="ti-user"></i>
 										</div>
 										<div class="item-inner">
-											<span class="title"> Patients </span><i class="icon-arrow"></i>
+											<span class="title"> Nurses </span><i class="icon-arrow"></i>
 										</div>
 									</div>
 								</a>
@@ -66,6 +66,27 @@
 									
 									<li>
 										<a href="manage-users.php">
+											<span class="title"> Manage Nurses </span>
+										</a>
+									</li>
+									
+								</ul>
+								</li>
+								<li>
+								<a href="javascript:void(0)">
+									<div class="item-content">
+										<div class="item-media">
+											<i class="ti-user"></i>
+										</div>
+										<div class="item-inner">
+											<span class="title"> Patients </span><i class="icon-arrow"></i>
+										</div>
+									</div>
+								</a>
+								<ul class="sub-menu">
+									
+									<li>
+										<a href="manage-patient.php">
 											<span class="title"> Manage Patients </span>
 										</a>
 									</li>
@@ -85,6 +106,38 @@
 									</div>
 								</a>
 							</li>
+
+
+
+				<li>
+								<a href="javascript:void(0)">
+									<div class="item-content">
+										<div class="item-media">
+											<i class="ti-files"></i>
+										</div>
+										<div class="item-inner">
+											<span class="title"> Conatctus Queries </span><i class="icon-arrow"></i>
+										</div>
+									</div>
+								</a>
+								<ul class="sub-menu">
+									
+									<li>
+										<a href="unread-queries.php">
+											<span class="title"> Unread Query </span>
+										</a>
+									</li>
+
+									<li>
+										<a href="read-query.php">
+											<span class="title"> Read Query </span>
+										</a>
+									</li>
+									
+								</ul>
+								</li>
+
+
 
 	<li>
 								<a href="doctor-logs.php">
@@ -113,7 +166,41 @@
 									</div>
 								</a>
 							</li>						
-				
+				<li>
+								<a href="javascript:void(0)">
+									<div class="item-content">
+										<div class="item-media">
+											<i class="ti-files"></i>
+										</div>
+										<div class="item-inner">
+											<span class="title"> Reports </span><i class="icon-arrow"></i>
+										</div>
+									</div>
+								</a>
+								<ul class="sub-menu">
+									
+									<li>
+										<a href="between-dates-reports.php">
+											<span class="title">B/w dates reports </span>
+										</a>
+									</li>
+
+									
+									
+								</ul>
+								<li>
+								<a href="patient-search.php">
+									<div class="item-content">
+										<div class="item-media">
+											<i class="ti-search"></i>
+										</div>
+										<div class="item-inner">
+											<span class="title"> Patient Search </span>
+										</div>
+									</div>
+								</a>
+							</li>
+								</li>
 
 						</ul>
 						<!-- end: CORE FEATURES -->

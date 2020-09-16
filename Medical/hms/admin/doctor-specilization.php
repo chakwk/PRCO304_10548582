@@ -1,18 +1,18 @@
 <?php
 session_start();
-//error_reporting(0);
+error_reporting(0);
 include('include/config.php');
 include('include/checklogin.php');
 check_login();
 if(isset($_POST['submit']))
 {
-$sql=mysql_query("insert into doctorSpecilization(specilization) values('".$_POST['doctorspecilization']."')");
+$sql=mysqli_query($con,"insert into doctorSpecilization(specilization) values('".$_POST['doctorspecilization']."')");
 $_SESSION['msg']="Doctor Specialization added successfully !!";
 }
 
 if(isset($_GET['del']))
 		  {
-		          mysql_query("delete from doctorSpecilization where id = '".$_GET['id']."'");
+		          mysqli_query($con,"delete from doctorSpecilization where id = '".$_GET['id']."'");
                   $_SESSION['msg']="data deleted !!";
 		  }
 ?>
@@ -20,12 +20,7 @@ if(isset($_GET['del']))
 <html lang="en">
 	<head>
 		<title>Admin | Doctor Specialization</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta content="" name="description" />
-		<meta content="" name="author" />
+	
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
@@ -128,9 +123,9 @@ if(isset($_GET['del']))
 										</thead>
 										<tbody>
 <?php
-$sql=mysql_query("select * from doctorSpecilization");
+$sql=mysqli_query($con,"select * from doctorSpecilization");
 $cnt=1;
-while($row=mysql_fetch_array($sql))
+while($row=mysqli_fetch_array($sql))
 {
 ?>
 

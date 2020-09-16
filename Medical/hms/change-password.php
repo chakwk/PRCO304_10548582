@@ -8,11 +8,11 @@ date_default_timezone_set('Asia/Kolkata');// change according timezone
 $currentTime = date( 'd-m-Y h:i:s A', time () );
 if(isset($_POST['submit']))
 {
-$sql=mysql_query("SELECT password FROM  users where password='".md5($_POST['cpass'])."' && email='".$_SESSION['login']."'");
-$num=mysql_fetch_array($sql);
+$sql=mysqli_query($con,"SELECT password FROM  users where password='".md5($_POST['cpass'])."' && id='".$_SESSION['id']."'");
+$num=mysqli_fetch_array($sql);
 if($num>0)
 {
- $con=mysql_query("update users set password='".md5($_POST['npass'])."', updationDate='$currentTime' where email='".$_SESSION['login']."'");
+ $con=mysqli_query($con,"update users set password='".md5($_POST['npass'])."', updationDate='$currentTime' where id='".$_SESSION['id']."'");
 $_SESSION['msg1']="Password Changed Successfully !!";
 }
 else
@@ -25,12 +25,7 @@ $_SESSION['msg1']="Old Password not match !!";
 <html lang="en">
 	<head>
 		<title>User  | change Password</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta content="" name="description" />
-		<meta content="" name="author" />
+		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">

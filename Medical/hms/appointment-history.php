@@ -1,12 +1,12 @@
 <?php
 session_start();
-//error_reporting(0);
+error_reporting(0);
 include('include/config.php');
 include('include/checklogin.php');
 check_login();
 if(isset($_GET['cancel']))
 		  {
-		          mysql_query("update appointment set userStatus='0' where id = '".$_GET['id']."'");
+		          mysqli_query($con,"update appointment set userStatus='0' where id = '".$_GET['id']."'");
                   $_SESSION['msg']="Your appointment canceled !!";
 		  }
 ?>
@@ -14,12 +14,7 @@ if(isset($_GET['cancel']))
 <html lang="en">
 	<head>
 		<title>User | Appointment History</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta content="" name="description" />
-		<meta content="" name="author" />
+		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
@@ -87,9 +82,9 @@ if(isset($_GET['cancel']))
 										</thead>
 										<tbody>
 <?php
-$sql=mysql_query("select doctors.doctorName as docname,appointment.*  from appointment join doctors on doctors.id=appointment.doctorId where appointment.userId='".$_SESSION['id']."'");
+$sql=mysqli_query($con,"select doctors.doctorName as docname,appointment.*  from appointment join doctors on doctors.id=appointment.doctorId where appointment.userId='".$_SESSION['id']."'");
 $cnt=1;
-while($row=mysql_fetch_array($sql))
+while($row=mysqli_fetch_array($sql))
 {
 ?>
 

@@ -11,24 +11,21 @@ $address=$_POST['address'];
 $city=$_POST['city'];
 $gender=$_POST['gender'];
 
-$sql=mysql_query("Update users set fullName='$fname',address='$address',city='$city',gender='$gender' where email='".$_SESSION['login']."'");
+$sql=mysqli_query($con,"Update users set fullName='$fname',address='$address',city='$city',gender='$gender' where id='".$_SESSION['id']."'");
 if($sql)
 {
-echo "<script>alert('Your Profile updated Successfully');</script>";
+$msg="Your Profile updated Successfully";
+
 
 }
+
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>User | Edit Profile</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta content="" name="description" />
-		<meta content="" name="author" />
+		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
@@ -77,7 +74,8 @@ echo "<script>alert('Your Profile updated Successfully');</script>";
 						<div class="container-fluid container-fullw bg-white">
 							<div class="row">
 								<div class="col-md-12">
-									
+<h5 style="color: green; font-size:18px; ">
+<?php if($msg) { echo htmlentities($msg);}?> </h5>
 									<div class="row margin-top-30">
 										<div class="col-lg-8 col-md-12">
 											<div class="panel panel-white">
@@ -85,11 +83,17 @@ echo "<script>alert('Your Profile updated Successfully');</script>";
 													<h5 class="panel-title">Edit Profile</h5>
 												</div>
 												<div class="panel-body">
-									<?php $sql=mysql_query("select * from users where email='".$_SESSION['login']."'");
-while($data=mysql_fetch_array($sql))
+									<?php 
+$sql=mysqli_query($con,"select * from users where id='".$_SESSION['id']."'");
+while($data=mysqli_fetch_array($sql))
 {
 ?>
-													<form role="form" name="edit" method="post">
+<h4><?php echo htmlentities($data['fullName']);?>'s Profile</h4>
+<p><b>Profile Reg. Date: </b><?php echo htmlentities($data['regDate']);?></p>
+<?php if($data['updationDate']){?>
+<p><b>Profile Last Updation Date: </b><?php echo htmlentities($data['updationDate']);?></p>
+<?php } ?>
+<hr />													<form role="form" name="edit" method="post">
 													
 
 <div class="form-group">
@@ -117,7 +121,14 @@ while($data=mysql_fetch_array($sql))
 									<label for="gender">
 																Gender
 															</label>
-					<input type="text" name="gender" class="form-control" required="required"  value="<?php echo htmlentities($data['gender']);?>">
+
+<select name="gender" class="form-control" required="required" >
+<option value="<?php echo htmlentities($data['gender']);?>"><?php echo htmlentities($data['gender']);?></option>
+<option value="male">Male</option>	
+<option value="female">Female</option>	
+<option value="other">Other</option>	
+</select>
+
 														</div>
 
 <div class="form-group">
@@ -125,18 +136,20 @@ while($data=mysql_fetch_array($sql))
 																 User Email
 															</label>
 					<input type="email" name="uemail" class="form-control"  readonly="readonly"  value="<?php echo htmlentities($data['email']);?>">
+					<a href="change-emaild.php">Update your email id</a>
 														</div>
 
 
 
 														
-														<?php } ?>
+														
 														
 														
 														<button type="submit" name="submit" class="btn btn-o btn-primary">
 															Update
 														</button>
 													</form>
+													<?php } ?>
 												</div>
 											</div>
 										</div>

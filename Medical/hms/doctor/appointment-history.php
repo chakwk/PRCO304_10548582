@@ -1,12 +1,12 @@
 <?php
 session_start();
-//error_reporting(0);
+error_reporting(0);
 include('include/config.php');
 include('include/checklogin.php');
 check_login();
 if(isset($_GET['cancel']))
 		  {
-		          mysql_query("update appointment set doctorStatus='0' where id = '".$_GET['id']."'");
+mysqli_query($con,"update appointment set doctorStatus='0' where id ='".$_GET['id']."'");
                   $_SESSION['msg']="Appointment canceled !!";
 		  }
 ?>
@@ -14,12 +14,7 @@ if(isset($_GET['cancel']))
 <html lang="en">
 	<head>
 		<title>Doctor | Appointment History</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta content="" name="description" />
-		<meta content="" name="author" />
+		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
@@ -87,9 +82,9 @@ if(isset($_GET['cancel']))
 										</thead>
 										<tbody>
 <?php
-$sql=mysql_query("select users.fullName as fname,appointment.*  from appointment join users on users.id=appointment.userId where appointment.doctorId='".$_SESSION['id']."'");
+$sql=mysqli_query($con,"select users.fullName as fname,appointment.*  from appointment join users on users.id=appointment.userId where appointment.doctorId='".$_SESSION['id']."'");
 $cnt=1;
-while($row=mysql_fetch_array($sql))
+while($row=mysqli_fetch_array($sql))
 {
 ?>
 
@@ -132,30 +127,7 @@ if(($row['userStatus']==1) && ($row['doctorStatus']==0))
 		echo "Canceled";
 		} ?>
 												</div>
-												<div class="visible-xs visible-sm hidden-md hidden-lg">
-													<div class="btn-group" dropdown is-open="status.isopen">
-														<button type="button" class="btn btn-primary btn-o btn-sm dropdown-toggle" dropdown-toggle>
-															<i class="fa fa-cog"></i>&nbsp;<span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu pull-right dropdown-light" role="menu">
-															<li>
-																<a href="#">
-																	Edit
-																</a>
-															</li>
-															<li>
-																<a href="#">
-																	Share
-																</a>
-															</li>
-															<li>
-																<a href="#">
-																	Remove
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div></td>
+												</td>
 											</tr>
 											
 											<?php 
